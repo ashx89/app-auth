@@ -4,23 +4,13 @@ var express = require('express');
 var app = express();
 
 var mongoose = require('mongoose');
+
 var token = require('app-util').token;
 
 module.exports = function onAuthExport(config) {
-	/**
-	 * Connect to database
-	 */
 	mongoose.connect(config.get('database'));
 
-	/**
-	 * Set application token configuration
-	 */
 	token.setConfig(config);
-
-	/**
-	 * Authentication Middleware
-	 */
-	app.use(require('express-validator')());
 
 	/**
 	 * Authentication Routes
