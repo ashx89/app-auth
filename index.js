@@ -1,10 +1,20 @@
+global.__base = __dirname;
+
 var express = require('express');
 var app = express();
 
+var mongoose = require('mongoose');
 var token = require('app-util').token;
 
-module.exports = function (config) {
+module.exports = function onAuthExport(config) {
+	/**
+	 * Connect to database
+	 */
+	mongoose.connect(config.get('database'));
 
+	/**
+	 * Set application token configuration
+	 */
 	token.setConfig(config);
 
 	/**
@@ -15,9 +25,11 @@ module.exports = function (config) {
 	/**
 	 * Authentication Routes
 	 */
-	app.get('/auth/login', require('./components/login'));
-	app.get('/auth/logout', require('./components/logout'));
-	app.get('/auth/register', require('./components/register'));
+	app.post('/auth/login', require('./components/login'));
+	app.post('/auth/logout', require('./components/logout'));
+	app.post('/auth/register', require('./components/register'));
+
+	app.get('/account', require('./models/controller').account);
 
 	return app;
 };
