@@ -15,9 +15,9 @@ module.exports = function (config) {
 	/**
 	 * Authentication Routes
 	 */
-	app.get('/auth/login', require('./app/login'));
-	app.get('/auth/logout', require('./app/logout'));
-	app.get('/auth/register', require('./app/register'));
+	app.get('/auth/login', require('./components/login'));
+	app.get('/auth/logout', require('./components/logout'));
+	app.get('/auth/register', require('./components/register'));
 
 	return app;
 };
