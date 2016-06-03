@@ -1,9 +1,23 @@
+var express = require('express');
+var app = express();
 
-module.exports = function (serverApp, config) {
+var token = require('app-util').token;
+
+module.exports = function (config) {
+
+	token.setConfig(config);
+
 	/**
-	 * Routes :: Authentication
+	 * Authentication Middleware
 	 */
-	serverApp.use(vhost(config.get('apiHost'), require('./app/authentication')(config)));
+	app.use(require('express-validator')());
 
-	return serverApp;
+	/**
+	 * Authentication Routes
+	 */
+	app.get('/auth/login', require('./app/login'));
+	app.get('/auth/logout', require('./app/logout'));
+	app.get('/auth/register', require('./app/register'));
+
+	return app;
 };
