@@ -1,7 +1,6 @@
 var bcrypt = require('bcrypt');
-var validator = require('mongoose-validators');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var validator = require('mongoose-validators');
 
 function validLength(value) {
 	return value && value.length >= 8;
@@ -10,27 +9,27 @@ function validLength(value) {
 /**
  * User Data Model
  */
-var userSchema = new Schema({
+var userSchema = new mongoose.Schema({
 	firstname: {
 		type: String,
-		required: true,
+		required: [true, 'Missing Firstname'],
 		validate: [validator.isAlpha, 'Invalid Firstname']
 	},
 	lastname: {
 		type: String,
-		required: true,
+		required: [true, 'Missing Lastname'],
 		validate: [validator.isAlpha, 'Invalid Lastname']
 	},
 	email: {
 		type: String,
-		required: true,
 		lowercase: true,
 		index: true,
+		required: [true, 'Missing Email Address'],
 		validate: [validator.isEmail, 'Invalid Email']
 	},
 	password: {
 		type: String,
-		required: true,
+		required: [true, 'Missing Password'],
 		validate: [validLength, 'Password must be at least 8 characters']
 	},
 	hash: String,
@@ -63,9 +62,9 @@ userSchema.virtual('fullname').get(function onGetFullname() {
 /**
  * User Data Model Virutals
  */
-userSchema.virtual('corporate').get(function onGetRole() {
-	return (this.roles.indexOf('corporate') > -1);
-});
+// userSchema.virtual('corporate').get(function onGetRole() {
+// 	return (this.roles.indexOf('corporate') > -1);
+// });
 
 /**
  * Run when a new model has been created

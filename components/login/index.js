@@ -3,7 +3,7 @@ var token = require('app-util').token;
 /**
  * When to expire token
  */
-var TOKEN_EXPIRY = 60 * 1;
+var TOKEN_EXPIRY = 60 * 5;
 
 /**
  * Used to set the response cookie

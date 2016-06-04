@@ -3,7 +3,7 @@ var token = require('app-util').token;
 /**
  * When to expire token
  */
-var TOKEN_EXPIRY = 60 * 1;
+var TOKEN_EXPIRY = 60 * 5;
 
 /**
  * Used to set the response cookie
@@ -20,6 +20,12 @@ var User = require(__base + '/models/user');
  */
 var register = function onRegister(req, res, next) {
 	var user = new User(req.body);
+
+	// Schema model not picking up isEmail validation
+	req.checkBody('email', 'Invalid Email').isEmail();
+
+	var errors = req.validationErrors()[0];
+	if (errors) return res.status(400).json(errors);
 
 	User.findOne({ email: user.email }, function onFindUser(err, exists) {
 		if (err) return next(err);

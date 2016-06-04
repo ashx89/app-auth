@@ -19,7 +19,5 @@ module.exports = function onAuthExport(config) {
 	app.post('/auth/logout', require('./components/logout'));
 	app.post('/auth/register', require('./components/register'));
 
-	app.get('/account', require('./models/controller').account);
-
 	return app;
 };
