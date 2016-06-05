@@ -8,9 +8,9 @@ var mongoose = require('mongoose');
 var token = require('app-util').token;
 
 module.exports = function onAuthExport(config) {
-	mongoose.connect(process.env.DATABASE);
+	// mongoose.connect(process.env.DATABASE);
 
-	//token.setConfig(config);
+	// token.setConfig(config);
 
 	/**
 	 * Authentication Routes
