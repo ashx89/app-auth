@@ -3,18 +3,21 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport(process.env.PASSWORD_RESET_EMAIL);
 
-var mailOptions = {
-	from: '"' + process.env.APPLICATION_NAME + ' 👥" <' + process.env.APPLICATION_EMAIL + '>',
-	subject: 'Password Reset'
-};
-
 /**
  * User Model
  */
 var User = require(__base + '/models/user');
 
 /**
- * Login authenticaton function
+ * Email Settings
+ */
+var mailOptions = {
+	from: '"' + process.env.APPLICATION_NAME + ' 👥" <' + process.env.APPLICATION_EMAIL + '>',
+	subject: 'Password Reset'
+};
+
+/**
+ * Forgot Password function
  */
 var passwordForgot = function onForgot(req, res, next) {
 	req.checkBody('email', 'Invalid Email').isEmail();

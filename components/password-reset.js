@@ -3,20 +3,26 @@ var token = require('app-util').token;
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport(process.env.PASSWORD_RESET_EMAIL);
 
-var TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
-
 var COOKIE_NAME = 'user';
+
+var TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 
 /**
  * User Model
  */
 var User = require(__base + '/models/user');
 
+/**
+ * Email Settings
+ */
 var mailOptions = {
 	from: '"' + process.env.APPLICATION_NAME + ' 👥" <' + process.env.APPLICATION_EMAIL + '>',
 	subject: 'Your password has been updated'
 };
 
+/**
+ * Password Reset GET function
+ */
 var passwordResetGet = function onReset(req, res, next) {
 	var resetToken = req.query.token ? req.query.token : '';
 	if (!resetToken) return next(new Error('No reset token found'));
@@ -32,7 +38,7 @@ var passwordResetGet = function onReset(req, res, next) {
 };
 
 /**
- * Login authenticaton function
+ * Password Reset POST function
  */
 var passwordResetPost = function onReset(req, res, next) {
 	var resetToken = req.query.token ? req.query.token : '';
