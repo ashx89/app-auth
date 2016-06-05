@@ -7,7 +7,7 @@ var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 /**
  * User Model
  */
-var User = require(__base + '/models/user');
+var User = require('../models/user');
 
 /**
  * Login authenticaton function
