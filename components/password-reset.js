@@ -13,7 +13,7 @@ var COOKIE_NAME = 'user';
 var User = require(__base + '/models/user');
 
 var mailOptions = {
-	from: '"PrepMaker 👥" <prepmaker@gmail.com>',
+	from: '"' + process.env.APPLICATION_NAME + ' 👥" <' + process.env.APPLICATION_EMAIL + '>',
 	subject: 'Your password has been updated'
 };
 

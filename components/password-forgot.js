@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport(process.env.PASSWORD_RESET_EMAIL);
 
 var mailOptions = {
-	from: '"PrepMaker 👥" <prepmaker@gmail.com>',
+	from: '"' + process.env.APPLICATION_NAME + ' 👥" <' + process.env.APPLICATION_EMAIL + '>',
 	subject: 'Password Reset'
 };
 
@@ -51,13 +51,13 @@ var passwordForgot = function onForgot(req, res, next) {
 			mailOptions.html += '<p>To reset your password, please click on this link (expires in 24 hours): ';
 			mailOptions.html += '<a href="' + link + '">Reset Password</a></p>';
 
-			transporter.sendMail(mailOptions, function onSendMail(err, result) {
-				return callback(err, result);
+			transporter.sendMail(mailOptions, function onSendMail(err) {
+				return callback(err, token);
 			});
 		}
-	], function onComplete(err, result) {
+	], function onComplete(err, token) {
 		if (err) return next(err);
-		return res.status(200).json(result);
+		return res.status(200).json(token);
 	});
 };
 
