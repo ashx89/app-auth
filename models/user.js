@@ -34,6 +34,8 @@ var userSchema = new mongoose.Schema({
 	},
 	hash: String,
 	salt: String,
+	reset_password_token: String,
+	reset_password_expiry: String,
 	roles: { type: Array, default: ['user'] }
 }, {
 	minimize: true,
@@ -96,6 +98,8 @@ userSchema.set('toJSON', {
 		delete ret.password;
 		delete ret.hash;
 		delete ret.salt;
+		delete ret.reset_password_token;
+		delete ret.reset_password_expiry;
 		return ret;
 	}
 });

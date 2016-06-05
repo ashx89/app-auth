@@ -1,5 +1,5 @@
 {
-  "name": "app-authentication",
+  "name": "app-auth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,20 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashx89/app-authentication.git"
+    "url": "git+https://github.com/ashx89/app-auth.git"
   },
   "author": "Ashley J. Taylor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ashx89/app-authentication/issues"
+    "url": "https://github.com/ashx89/app-auth/issues"
   },
-  "homepage": "https://github.com/ashx89/app-authentication#readme",
+  "homepage": "https://github.com/ashx89/app-auth#readme",
   "dependencies": {
-    "app-util": "git+https://github.com/ashx89/app-util.git#v0.1.0",
+    "app-util": "git+https://github.com/ashx89/app-util.git#v0.2.0",
+    "async": "^2.0.0-rc.5",
     "bcrypt": "^0.8.6",
     "express": "^4.13.4",
     "mongoose": "^4.4.19",
     "mongoose-validators": "^0.1.0",
+    "nodemailer": "^2.4.2",
     "underscore": "^1.8.3"
   }
 }
