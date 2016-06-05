@@ -1,5 +1,3 @@
-global.__base = __dirname;
-
 var express = require('express');
 var app = express();
 
