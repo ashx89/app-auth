@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ashx89/app-auth#readme",
   "dependencies": {
-    "app-util": "git+https://github.com/ashx89/app-util.git#v0.2.0",
+    "app-util": "git+https://github.com/ashx89/app-util.git#master",
     "async": "^2.0.0-rc.5",
     "bcrypt": "^0.8.6",
     "express": "^4.13.4",
