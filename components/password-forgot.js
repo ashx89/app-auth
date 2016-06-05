@@ -39,7 +39,7 @@ var passwordForgot = function onForgot(req, res, next) {
 				if (!user) return next(new Error('Account does not exist'));
 
 				user.reset_password_token = token;
-				user.reset_password_expiry = Date.now() + 3600000;
+				user.reset_password_expiry = Date.now() + 60000;
 
 				user.save(function onSave(err) {
 					return callback(err, token, user);

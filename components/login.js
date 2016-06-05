@@ -1,14 +1,8 @@
 var token = require('app-util').token;
 
-/**
- * When to expire token
- */
-var TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
-
-/**
- * Used to set the response cookie
- */
 var COOKIE_NAME = 'user';
+
+var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 
 /**
  * User Model
@@ -32,7 +26,7 @@ var login = function onLogin(req, res, next) {
 			if (err) return next(err);
 			if (!match) return next(new Error('Incorrect password'));
 
-			res.cookie(COOKIE_NAME, token.create(doc.toJSON(), { expiresIn: TOKEN_EXPIRY }, { httpOnly: true }));
+			res.cookie(COOKIE_NAME, token.create(doc.toJSON(), { expiresIn: USER_TOKEN_EXPIRY }, { httpOnly: true }));
 			if (!err && match) return res.status(200).json(doc);
 		});
 	});
