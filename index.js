@@ -3,18 +3,7 @@ global.__base = __dirname;
 var express = require('express');
 var app = express();
 
-var mongoose = require('mongoose');
-
-var token = require('app-util').token;
-
-module.exports = function onAuthExport(config) {
-	// mongoose.connect(process.env.DATABASE);
-
-	// token.setConfig(config);
-
-	/**
-	 * Authentication Routes
-	 */
+module.exports = function onAuthExport() {
 	app.post('/auth/login', require('./components/login'));
 	app.post('/auth/logout', require('./components/logout'));
 	app.post('/auth/register', require('./components/register'));
