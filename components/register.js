@@ -1,3 +1,4 @@
+var s3 = require('app-util').s3();
 var token = require('app-util').token;
 
 var COOKIE_NAME = 'user';
@@ -17,9 +18,10 @@ var register = function onRegister(req, res, next) {
 
 	// Schema model not picking up isEmail validation
 	req.checkBody('email', 'Invalid Email').isEmail();
-
 	var errors = req.validationErrors()[0];
 	if (errors) return res.status(400).json(errors);
+
+	user.resource = process.env.S3_BUCKET_URL + user._id;
 
 	User.findOne({ email: user.email }, function onFindUser(err, exists) {
 		if (err) return next(err);

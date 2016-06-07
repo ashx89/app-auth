@@ -36,6 +36,7 @@ var userSchema = new mongoose.Schema({
 	salt: String,
 	reset_password_token: String,
 	reset_password_expiry: String,
+	resource: { type: String },
 	roles: { type: Array, default: ['user'] }
 }, {
 	minimize: true,
