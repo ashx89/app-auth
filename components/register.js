@@ -27,7 +27,7 @@ var register = function onRegister(req, res, next) {
 		user.save(function onUserSave(err) {
 			if (err) return next(err);
 
-			user.resource = process.env.S3_BUCKET_URL + user._id;
+			user.resource = process.env.S3_BUCKET_URL + user._id + '/';
 
 			user.save(function onUserSave(err) {
 				if (err) return next(err);
