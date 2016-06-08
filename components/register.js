@@ -2,7 +2,7 @@ var token = require('app-util').token;
 
 var COOKIE_NAME = 'user';
 
-var S3_FOLDERNAME = 'user/';
+var S3_FOLDERNAME = 'users/';
 
 var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 
