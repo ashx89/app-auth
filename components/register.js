@@ -2,8 +2,6 @@ var token = require('app-util').token;
 
 var COOKIE_NAME = 'user';
 
-var S3_FOLDERNAME = 'users/';
-
 var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 
 /**
@@ -29,7 +27,7 @@ var register = function onRegister(req, res, next) {
 		user.save(function onUserSave(err) {
 			if (err) return next(err);
 
-			user.resource = process.env.S3_BUCKET_URL + S3_FOLDERNAME + user._id + '/';
+			user.resource = process.env.S3_BUCKET_URL + user._id + '/';
 
 			user.save(function onUserSave(err) {
 				if (err) return next(err);
