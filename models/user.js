@@ -10,6 +10,9 @@ function validLength(value) {
  * User Data Model
  */
 var userSchema = new mongoose.Schema({
+	customer_id: String,
+	card_id: String,
+	
 	firstname: {
 		type: String,
 		required: [true, 'Missing Firstname'],
