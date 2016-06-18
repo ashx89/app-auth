@@ -12,4 +12,4 @@ app.post('/auth/password-reset', require('./components/password-reset').post);
 module.exports.app = app;
 
 var User = require('./models/user');
-module.exports.userModal = User;
+module.exports.userModel = User;
