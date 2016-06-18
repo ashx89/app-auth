@@ -11,7 +11,7 @@ function validLength(value) {
  */
 var userSchema = new mongoose.Schema({
 	customer_id: String,
-	cards: type Array,
+	cards: Array,
 
 	firstname: {
 		type: String,
