@@ -9,7 +9,10 @@ function validLength(value) {
 /**
  * User Data Model
  */
-var userSchema = new mongoose.Schema({	
+var userSchema = new mongoose.Schema({
+	customer_id: String,
+	cards: type Array,
+
 	firstname: {
 		type: String,
 		required: [true, 'Missing Firstname'],
@@ -61,13 +64,6 @@ userSchema.methods.comparePassword = function onPasswordCompare(enteredPassword,
 userSchema.virtual('fullname').get(function onGetFullname() {
 	return this.firstname + ' ' + this.lastname;
 });
-
-/**
- * User Data Model Virutals
- */
-// userSchema.virtual('corporate').get(function onGetRole() {
-// 	return (this.roles.indexOf('corporate') > -1);
-// });
 
 /**
  * Run when a new model has been created
