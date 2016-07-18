@@ -9,4 +9,7 @@ app.post('/auth/password-forgot', require('./components/password-forgot'));
 app.get('/auth/password-reset', require('./components/password-reset').get);
 app.post('/auth/password-reset', require('./components/password-reset').post);
 
-module.exports = app;
+module.exports = {
+	app: app,
+	model: require('./models/user')
+};
