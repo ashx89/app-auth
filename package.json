@@ -17,13 +17,7 @@
   },
   "homepage": "https://github.com/ashx89/app-auth#readme",
   "dependencies": {
-    "app-util": "git+https://github.com/ashx89/app-util.git",
-    "async": "^2.0.0-rc.6",
     "bcrypt": "^0.8.6",
-    "express": "^4.13.4",
-    "mongoose": "^4.4.19",
-    "mongoose-validators": "^0.1.0",
-    "nodemailer": "^2.4.2",
-    "underscore": "^1.8.3"
+    "nodemailer": "^2.4.2"
   }
 }
