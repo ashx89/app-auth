@@ -3,6 +3,12 @@ var mongoose = require('mongoose');
 var paginate = require('mongoose-paginate');
 var validator = require('mongoose-validators');
 
+paginate.paginate.options = {
+	sort: 'lastname',
+	lean: true,
+	limit: 10
+};
+
 function validLength(value) {
 	return value && value.length >= 8;
 }
