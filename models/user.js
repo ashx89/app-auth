@@ -1,5 +1,6 @@
 var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
+var paginate = require('mongoose-paginate');
 var validator = require('mongoose-validators');
 
 function validLength(value) {
@@ -97,5 +98,10 @@ userSchema.set('toJSON', {
 		return ret;
 	}
 });
+
+/**
+ * Add pagination to model
+ */
+userSchema.plugin(paginate);
 
 module.exports = mongoose.model('User', userSchema);
