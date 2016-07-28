@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require(global.__auth_base + '/models/user');
 var Account = require(global.__base + '/manager').AccountModel;
 
 var search = function onFetch(req, res, next) {
