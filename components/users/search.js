@@ -1,5 +1,3 @@
-var _ = require('underscore');
-
 var User = require(global.__auth_base + '/models/user');
 var Account = require(global.__base + '/manager').AccountModel;
 
@@ -29,8 +27,19 @@ var search = function onFetch(req, res, next) {
 			Account.findOne({ user: user._id }, function onFind(err, account) {
 				if (err) return next(err);
 
-				data = user;
-				data = _.extend(data, account);
+				data = account;
+				data.account_id = account._id;
+
+				data._id = user._id;
+				data.firstname = user.firstname;
+				data.lastname = user.lastname;
+				data.fullname = user.fullname;
+				data.resource = user.resource;
+				data.roles = user.roles;
+				data.email = user.email;
+				data.createdAt = user.createdAt;
+				data.updatedAt = user.updatedAt;
+
 				resultsObject.items.push(data);
 
 				if (result.docs.length === index + 1) return res.status(200).json(resultsObject);
