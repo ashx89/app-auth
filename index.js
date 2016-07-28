@@ -11,11 +11,6 @@ app.post('/auth/password-forgot', require('./components/auth/password-forgot'));
 app.get('/auth/password-reset', require('./components/auth/password-reset').get);
 app.post('/auth/password-reset', require('./components/auth/password-reset').post);
 
-/**
- * Search route
- */
-app.get('/users/search', require('./components/users/search'));
-
 module.exports = {
 	app: app,
 	model: require('./models/user')
