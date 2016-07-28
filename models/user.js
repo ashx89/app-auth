@@ -3,12 +3,6 @@ var mongoose = require('mongoose');
 var paginate = require('mongoose-paginate');
 var validator = require('mongoose-validators');
 
-paginate.paginate.options = {
-	sort: 'lastname',
-	lean: true,
-	limit: 10
-};
-
 function validLength(value) {
 	return value && value.length >= 8;
 }
@@ -106,8 +100,14 @@ userSchema.set('toJSON', {
 });
 
 /**
- * Add pagination to model
+ * Pagination defaults
+ * Add paginate to model
  */
-userSchema.plugin(paginate);
+paginate.paginate.options = {
+	sort: 'lastname',
+	lean: true,
+	limit: 10
+};
 
+userSchema.plugin(paginate);
 module.exports = mongoose.model('User', userSchema);

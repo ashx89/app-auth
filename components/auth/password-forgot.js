@@ -6,7 +6,7 @@ var transporter = nodemailer.createTransport(process.env.PASSWORD_RESET_EMAIL);
 /**
  * User Model
  */
-var User = require('../models/user');
+var User = require(global.__auth_base + '/models/user');
 
 /**
  * Email Settings

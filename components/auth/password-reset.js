@@ -10,7 +10,7 @@ var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
 /**
  * User Model
  */
-var User = require('../models/user');
+var User = require(global.__auth_base + '/models/user');
 
 /**
  * Email Settings
