@@ -1,11 +1,7 @@
-var _ = require('underscore');
-
 var User = require(global.__auth_base + '/models/user');
 var Account = require(global.__base + '/manager').AccountModel;
 
 var search = function onFetch(req, res, next) {
-	var data = {};
-
 	var resultsObject = {
 		items: []
 	};
@@ -18,7 +14,7 @@ var search = function onFetch(req, res, next) {
 	}).then(function onPaginate(result) {
 		if (!result.docs.length) return next(new Error('Users not found'));
 
-		resultsObject.found = {
+		resultsObject.pagination = {
 			total: result.total,
 			limit: result.limit,
 			page: result.page,
@@ -26,23 +22,10 @@ var search = function onFetch(req, res, next) {
 		};
 
 		result.docs.forEach(function onEachUser(user, index) {
-			Account.findOne({ user: user._id }, function onFind(err, account) {
+			Account.find({ user: user._id }, function onFind(err, account) {
 				if (err) return next(err);
 
-				data = _.extend(data, account);
-				data.account_id = account._id;
-
-				data._id = user._id;
-				data.firstname = user.firstname;
-				data.lastname = user.lastname;
-				data.fullname = user.fullname;
-				data.resource = user.resource;
-				data.roles = user.roles;
-				data.email = user.email;
-				data.createdAt = user.createdAt;
-				data.updatedAt = user.updatedAt;
-
-				resultsObject.items.push(data);
+				resultsObject.items.push({ user: user, account: account });
 
 				if (result.docs.length === index + 1) return res.status(200).json(resultsObject);
 			});
