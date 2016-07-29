@@ -42,7 +42,7 @@ var register = function onRegister(req, res, next) {
 						tokenObject.account = account._id;
 
 						res.cookie(COOKIE_NAME, token.create(tokenObject, { expiresIn: process.env.USER_TOKEN_EXPIRY }), { httpOnly: true });
-						return res.status(200).json(user.toJSON());
+						return res.status(200).json(user);
 					});
 				});
 			});
