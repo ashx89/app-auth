@@ -2,12 +2,8 @@ var token = require('app-util').token;
 
 var COOKIE_NAME = 'user';
 
-var USER_TOKEN_EXPIRY = process.env.USER_TOKEN_EXPIRY;
-
-/**
- * User Model
- */
 var User = require(global.__auth_base + '/models/user');
+var Account = require(global.__base + '/manager').AccountModel;
 
 /**
  * Register authenticaton function
@@ -15,8 +11,8 @@ var User = require(global.__auth_base + '/models/user');
 var register = function onRegister(req, res, next) {
 	var user = new User(req.body);
 
-	// Schema model not picking up isEmail validation
 	req.checkBody('email', 'Invalid Email').isEmail();
+
 	var errors = req.validationErrors()[0];
 	if (errors) return res.status(400).json(errors);
 
@@ -27,13 +23,28 @@ var register = function onRegister(req, res, next) {
 		user.save(function onUserSave(err) {
 			if (err) return next(err);
 
-			user.resource = process.env.S3_BUCKET_URL + user._id + '/';
-
-			user.save(function onUserSave(err) {
+			Account.findOne({ user: user._id }, function onFindAccount(err, exists) {
 				if (err) return next(err);
+				if (exists) return next(new Error('Account already exists'));
 
-				res.cookie(COOKIE_NAME, token.create(user.toJSON(), { expiresIn: USER_TOKEN_EXPIRY }), { httpOnly: true });
-				return res.status(200).json(user);
+				var account = new Account();
+				account.user = user._id;
+
+				account.save(function onUserSave(err) {
+					if (err) return next(err);
+
+					user.resource = process.env.S3_BUCKET_URL + user._id + '/';
+
+					user.save(function onUserSave(err) {
+						if (err) return next(err);
+
+						var tokenObject = user.toJSON();
+						tokenObject.account = account._id;
+
+						res.cookie(COOKIE_NAME, token.create(tokenObject, { expiresIn: process.env.USER_TOKEN_EXPIRY }), { httpOnly: true });
+						return res.status(200).json(user.toJSON());
+					});
+				});
 			});
 		});
 	});
